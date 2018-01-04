@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[今天弄了一天的博客]]></title>
+    <url>%2F2018%2F01%2F04%2F%E4%BB%8A%E5%A4%A9%E5%BC%84%E4%BA%86%E4%B8%80%E5%A4%A9%E7%9A%84%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[这是一篇博客当我再爱你的时候别害怕，风轻云淡]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[MyFirstBlog]]></title>
+    <url>%2F2018%2F01%2F04%2FMyFirstBlog%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[这是一篇新的博客哦]]></title>
+    <url>%2F2018%2F01%2F04%2FnewBlog%2F</url>
+    <content type="text"><![CDATA[当我还是一个小孩子门前有很多茉莉花]]></content>
+      <categories>
+        <category>人生感悟</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+</search>
