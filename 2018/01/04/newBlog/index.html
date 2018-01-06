@@ -472,18 +472,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/04/MyFirstBlog/" rel="next" title="MyFirstBlog">
-                <i class="fa fa-chevron-left"></i> MyFirstBlog
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/04/今天弄了一天的博客/" rel="prev" title="今天弄了一天的博客">
-                今天弄了一天的博客 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/04/MyFirstBlog/" rel="prev" title="MyFirstBlog">
+                MyFirstBlog <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -841,7 +837,7 @@
 		widget_id: 99659,
 		xid: "2018/01/04/newBlog/",
 		social:null,
-		callback: function(app, init){ console.log('Log message after init HC'); }
+		like_href:null
 		});
 
 
@@ -854,6 +850,7 @@
 		if("HC_LOAD_INIT" in window)return;
 		HC_LOAD_INIT = true;
 		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		lang="cn";
 		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
 		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99659/"+lang+"/widget.js";
 		var s = document.getElementsByTagName("script")[0];
