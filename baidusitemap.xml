@@ -3,6 +3,46 @@
 
 
     
+  <url>
+    <loc>http://www.geetry.com/2018/01/13/SpringMybatisMutilDataSource2/</loc>
+    <lastmod>2018-01-13T15:07:47.994Z</lastmod>
+    <data>
+        <display>
+        <title>SpringBoot+Mybatis实现事务内多数据源切换2</title>
+        <pubTime>2018-01-13T14:21:52.000Z</pubTime>
+        
+        <tag>SpringBoot,Mybatis,多数据源切换</tag>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://www.geetry.com/categories/java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.geetry.com/2018/01/13/SpringMybatisMutilDatasource/</loc>
+    <lastmod>2018-01-13T15:07:47.991Z</lastmod>
+    <data>
+        <display>
+        <title>SpringBoot+Mybatis实现事务内多数据源切换1</title>
+        <pubTime>2018-01-13T03:41:01.000Z</pubTime>
+        
+        <tag>SpringBoot,Mybatis,多数据源切换</tag>
+         
+         
+           
+             
+              <breadCrumb title="java" url="http://www.geetry.com/categories/java/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://www.geetry.com/2018/01/06/hexo-qiniu/</loc>
