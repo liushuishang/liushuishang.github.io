@@ -76,17 +76,17 @@
 
 
 
-<meta name="description" content="可以在这里留言哦">
+<meta name="description" content="生命易破碎，梦想只争朝夕">
 <meta property="og:type" content="website">
-<meta property="og:title" content="board">
-<meta property="og:url" content="http://www.geetry.com/board/index.html">
+<meta property="og:title" content="关于我">
+<meta property="og:url" content="http://www.geetry.com/about/index.html">
 <meta property="og:site_name" content="云翔天下">
-<meta property="og:description" content="可以在这里留言哦">
+<meta property="og:description" content="生命易破碎，梦想只争朝夕">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-01-07T02:56:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="board">
-<meta name="twitter:description" content="可以在这里留言哦">
+<meta name="twitter:title" content="关于我">
+<meta name="twitter:description" content="生命易破碎，梦想只争朝夕">
 
 
 
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://www.geetry.com/board/"/>
+  <link rel="canonical" href="http://www.geetry.com/about/"/>
 
 
 
@@ -260,6 +260,188 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.geetry.com/2018/03/09/java9初探/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流水殇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="云翔天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/09/java9初探/" itemprop="url">java9初探</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-09T10:34:11+08:00">2018-03-09</time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-09T12:55:37+08:00">2018-03-09</time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java9/" itemprop="url" rel="index">
+                    <span itemprop="name">java9</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/09/java9初探/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/03/09/java9初探/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>java自1995年诞生到现在已经23岁了，在这么长的时间里，java的每个版本都会带来快一些新的特性，同时还要保持对旧版本的兼容性，因此java的运行时也变得非常臃肿和庞大，运行时依赖的rt.jar单个文件就有60多M，即使你只是想运行一个简单地helloword,你也不得不加载高达60M+的依赖包。随着微服务和自动化运维的兴起，人们讲究的是快速、精细部署，老态龙钟的java却总是差强人意。<br>可以说java9的出现更多的是为了改善这些问题，提升java的竞争力。个人认为java9最大的改善在以下几个方面：</p>
+<ol>
+<li>模块化，避免泛滥的代码依赖和说不清道不明的误用。</li>
+<li>Jlink打包，可以生成一个最小依赖的Image，减少包的大小，轻量部署。</li>
+<li>提供了类似JShell的新的工具和新的编程API。</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/09/java9初探/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+
+    <div>
+          
+    </div>
+
+
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1373,7 +1555,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1384,7 +1566,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1395,7 +1577,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
