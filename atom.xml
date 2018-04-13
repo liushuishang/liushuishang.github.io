@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.geetry.com/"/>
-  <updated>2018-03-30T03:38:36.099Z</updated>
+  <updated>2018-04-13T10:59:04.601Z</updated>
   <id>http://www.geetry.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ServletRequestDataBinder</title>
+    <link href="http://www.geetry.com/2018/04/13/ServletRequestDataBinder/"/>
+    <id>http://www.geetry.com/2018/04/13/ServletRequestDataBinder/</id>
+    <published>2018-04-13T10:40:48.000Z</published>
+    <updated>2018-04-13T10:59:04.601Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>ServletRequestDataBinder</code>是Spring mvc提供的一个工具类，可以通过名称匹配把前台提交的表单数据绑定到某个对象的同名属性上，这样我们在使用的时候不用再一个个的从request对象里面获取。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PaidInRecordReportDTO paidInRecordReportDTO = <span class="keyword">new</span> PaidInRecordReportDTO();<span class="comment">//这是一个实体类</span></span><br><span class="line">ServletRequestDataBinder businessProofListinder = <span class="keyword">new</span> ServletRequestDataBinder(paidInRecordReportDTO);</span><br><span class="line">businessProofListinder.bind(request);<span class="comment">//这样就映射成一个对象</span></span><br></pre></td></tr></table></figure><p>前端表单<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"auditingCode"</span> <span class="attr">id</span>=<span class="string">"auditingCode"</span> <span class="attr">style</span>=<span class="string">"width: 150px;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"contractCode"</span> <span class="attr">id</span>=<span class="string">"contractCode"</span> <span class="attr">style</span>=<span class="string">"width: 150px;"</span>&gt;</span></span><br></pre></td></tr></table></figure></p><p>页面的name属性完全对应着PaidInRecordReportDTO 实体类中的属性(名字和类型)，若类型或者名字有一样不对应它不会报错只是不会绑定此属性而已。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;ServletRequestDataBinder&lt;/code&gt;是Spring mvc提供的一个工具类，可以通过名称匹配把前台提交的表单数据绑定到某个对象的同名属性上，这样我们在使用的时候不用再一个个的从request对象里面获取。&lt;/p&gt;
+&lt;figure cla
+      
+    
+    </summary>
+    
+      <category term="java Spring" scheme="http://www.geetry.com/categories/java-Spring/"/>
+    
+    
+      <category term="Spring mvc" scheme="http://www.geetry.com/tags/Spring-mvc/"/>
+    
+  </entry>
   
   <entry>
     <title>布隆过滤器介绍和应用</title>

@@ -76,17 +76,17 @@
 
 
 
-<meta name="description" content="生命易破碎，梦想只争朝夕">
+<meta name="description" content="可以在这里留言哦">
 <meta property="og:type" content="website">
-<meta property="og:title" content="关于我">
-<meta property="og:url" content="http://www.geetry.com/about/index.html">
+<meta property="og:title" content="board">
+<meta property="og:url" content="http://www.geetry.com/board/index.html">
 <meta property="og:site_name" content="云翔天下">
-<meta property="og:description" content="生命易破碎，梦想只争朝夕">
+<meta property="og:description" content="可以在这里留言哦">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-01-07T02:56:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于我">
-<meta name="twitter:description" content="生命易破碎，梦想只争朝夕">
+<meta name="twitter:title" content="board">
+<meta name="twitter:description" content="可以在这里留言哦">
 
 
 
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://www.geetry.com/about/"/>
+  <link rel="canonical" href="http://www.geetry.com/board/"/>
 
 
 
@@ -260,6 +260,182 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.geetry.com/2018/04/13/ServletRequestDataBinder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="流水殇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="云翔天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/13/ServletRequestDataBinder/" itemprop="url">ServletRequestDataBinder</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-13T18:40:48+08:00">2018-04-13</time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-04-13T18:59:04+08:00">2018-04-13</time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">java Spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/13/ServletRequestDataBinder/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/04/13/ServletRequestDataBinder/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>ServletRequestDataBinder</code>是Spring mvc提供的一个工具类，可以通过名称匹配把前台提交的表单数据绑定到某个对象的同名属性上，这样我们在使用的时候不用再一个个的从request对象里面获取。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PaidInRecordReportDTO paidInRecordReportDTO = <span class="keyword">new</span> PaidInRecordReportDTO();<span class="comment">//这是一个实体类</span></span><br><span class="line">ServletRequestDataBinder businessProofListinder = <span class="keyword">new</span> ServletRequestDataBinder(paidInRecordReportDTO);</span><br><span class="line">businessProofListinder.bind(request);<span class="comment">//这样就映射成一个对象</span></span><br></pre></td></tr></table></figure>
+<p>前端表单<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"auditingCode"</span> <span class="attr">id</span>=<span class="string">"auditingCode"</span> <span class="attr">style</span>=<span class="string">"width: 150px;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"contractCode"</span> <span class="attr">id</span>=<span class="string">"contractCode"</span> <span class="attr">style</span>=<span class="string">"width: 150px;"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>页面的name属性完全对应着PaidInRecordReportDTO 实体类中的属性(名字和类型)，若类型或者名字有一样不对应它不会报错只是不会绑定此属性而已。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+
+    <div>
+          
+    </div>
+
+
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1732,7 +1908,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1743,7 +1919,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1754,7 +1930,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
