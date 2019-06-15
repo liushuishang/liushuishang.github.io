@@ -394,7 +394,7 @@
 <li>如果这些点有任何一个 0，则被检索元素一定不在；</li>
 <li>如果都是 1，则被检索元素很可能在（存在误判率，下文会详解）。</li>
 </ol>
-<img title="布隆过滤器原理图" alt="布隆过滤器原理图" src="http://p24hn6n30.bkt.clouddn.com/static/images/boolmfilter1.png-blogImg">
+<img title="布隆过滤器原理图" alt="布隆过滤器原理图" src="http://img.qianzhousoft.com/static/images/boolmfilter1.png-blogImg">
 <p>如上图可知布隆过滤器的重点有两个：</p>
 <ol>
 <li>一个bit数组，用来存放映射信息</li>
@@ -431,9 +431,9 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BoolmFilterTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> insertions = <span class="number">1000000</span>;<span class="comment">//100w</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//初始化一个存储String数据的布隆过滤器，初始化大小为100w</span></span><br><span class="line">        BloomFilter&lt;String&gt; bloomFilter =</span><br><span class="line">                BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), insertions,<span class="number">0.01</span>);</span><br><span class="line">        <span class="comment">//初始化一个存储String数据的set，初始化大小为100w，做验证参考</span></span><br><span class="line">        Set&lt;String&gt; sets = <span class="keyword">new</span> HashSet&lt;String&gt;(insertions);</span><br><span class="line">        <span class="comment">//初始化一个存储String数据额list，初始化大小为100w</span></span><br><span class="line">        List&lt;String&gt; lists = <span class="keyword">new</span> ArrayList&lt;String&gt;(insertions);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//向三个容器中初始化100w个随机唯一的字符串</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; insertions; i++) &#123;</span><br><span class="line">            String uuid = UUID.randomUUID().toString();</span><br><span class="line">            bloomFilter.put(uuid);</span><br><span class="line">            sets.add(uuid);</span><br><span class="line">            lists.add(uuid);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//布隆过滤器误判的次数</span></span><br><span class="line">        <span class="keyword">int</span> wrongCount = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//布隆过滤器正确地次数</span></span><br><span class="line">        <span class="keyword">int</span> rightCount = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//随机抽取1w数据做验证</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">            String test = i % <span class="number">100</span> == <span class="number">0</span> ? lists.get(i / <span class="number">100</span>) : UUID.randomUUID().toString();</span><br><span class="line">            <span class="comment">//布隆过滤器验证通过</span></span><br><span class="line">            <span class="keyword">if</span> (bloomFilter.mightContain(test)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (sets.contains(test))</span><br><span class="line">                    rightCount++;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    wrongCount++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"right count : "</span> + rightCount);</span><br><span class="line">        System.out.println(<span class="string">"wrong count : "</span>+wrongCount);</span><br><span class="line">        System.out.println(<span class="string">"wrong rate : "</span>+Math.round(((wrongCount*<span class="number">1.0</span>)/(<span class="number">9900</span>))*<span class="number">100</span>)+<span class="string">"%"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>其中<code>insertions</code>表示我们全量数据的大小（但实际bit数组的长度和hash算法的个数都是不定的，根据误判率动态调整）。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BloomFilter&lt;String&gt; bloomFilter =</span><br><span class="line">        BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), insertions,<span class="number">0.01</span>);</span><br></pre></td></tr></table></figure></p>
 <p>这一行代码建立一个布隆过滤器，工厂方法有三个参数，分别表示过滤器的类型，容量大小，误判率（没错，你可以指定误判率，但是千万别写0，默认是0.03）。<br>接下来我们以100万随机字符串为数据源介绍布隆过滤器的使用以及统计其误判率。</p>
-<img title="布隆过滤器测试" alt="布隆过滤器测试" src="http://p24hn6n30.bkt.clouddn.com/static/images/boolmfilter2.png-blogImg">
+<img title="布隆过滤器测试" alt="布隆过滤器测试" src="http://img.qianzhousoft.com/static/images/boolmfilter2.png-blogImg">
 <p>由结果可以看到布隆过滤器说不过的确实不过，但是它说过的不一定真的是对的，这就是误判的情况，总体上实际误判率与我们期望的是一致的。<br>我们再来看看算法内部调整的数组长度和hash函数的个数：</p>
-<img title="布隆过滤器算法细节" alt="布隆过滤器算法细节" src="http://p24hn6n30.bkt.clouddn.com/static/images/boolmfilter3.png-blogImg">
+<img title="布隆过滤器算法细节" alt="布隆过滤器算法细节" src="http://img.qianzhousoft.com/static/images/boolmfilter3.png-blogImg">
 <p>可以看到为了达到我们要求的误判率，算法包实际创建的bit数组的长度是 9585058，Hash函数的个数是7个，具体为什么是这些数字，可以查看这篇论文了解：<br><code>http://en.wikipedia.org/wiki/Bloom_filter#Probability_of_false_positives</code></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我们首先介绍了布隆过滤器的基本原理、优势劣势、使用场景；然后利用guava提供的算法包展示了字符串的判断和测试，并验证了它的误判率。布隆过滤器在行业应用比较广泛，感谢google的工程师为我们提供了好用的算法包。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
@@ -645,7 +645,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -656,7 +656,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -667,7 +667,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
