@@ -76,17 +76,17 @@
 
 
 
-<meta name="description" content="生命易破碎，梦想只争朝夕">
+<meta name="description" content="可以在这里留言哦">
 <meta property="og:type" content="website">
-<meta property="og:title" content="关于我">
-<meta property="og:url" content="http://www.geetry.com/about/index.html">
+<meta property="og:title" content="board">
+<meta property="og:url" content="http://www.geetry.com/board/index.html">
 <meta property="og:site_name" content="云翔天下">
-<meta property="og:description" content="生命易破碎，梦想只争朝夕">
+<meta property="og:description" content="可以在这里留言哦">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-01-07T02:56:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于我">
-<meta name="twitter:description" content="生命易破碎，梦想只争朝夕">
+<meta name="twitter:title" content="board">
+<meta name="twitter:description" content="可以在这里留言哦">
 
 
 
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://www.geetry.com/about/"/>
+  <link rel="canonical" href="http://www.geetry.com/board/"/>
 
 
 
@@ -316,7 +316,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-06-15T10:02:29+08:00">2019-06-15</time>
+              <time title="更新于" itemprop="dateModified" datetime="2019-06-15T10:20:02+08:00">2019-06-15</time>
             
           </span>
 
@@ -389,9 +389,13 @@
       
         <p>我们对于对外提供的服务都会做一些防范措施，比如认证授权、容错限流等。今天主要是学习一下常用的接口限流算法。<br><a id="more"></a></p>
 <h2 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h2><p> 漏桶算法思路很简单，水（请求）先进入到漏桶里，漏桶以一定的速度出水，当水流入速度过大会直接溢出，可以看出漏桶算法能强行限制数据的传输速率。</p>
-<img title="令牌算法示意图" alt="令牌算法示意图" src="http://img.qianzhousoft.com/static/images/201906/令牌桶算法示意图.png-blogImg">
+<img title="漏桶算法示意图" alt="漏桶算法示意图" src="http://img.qianzhousoft.com/static/images/201906/漏桶算法示意图.png-blogImg">
+<p>伪代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> rate; <span class="comment">// leak rate in calls/s</span></span><br><span class="line"><span class="keyword">double</span> burst; <span class="comment">// bucket size in calls</span></span><br><span class="line"><span class="keyword">long</span> refreshTime; <span class="comment">// time for last water refresh</span></span><br><span class="line"><span class="keyword">double</span> water; <span class="comment">// water count at refreshTime</span></span><br><span class="line">refreshWater() &#123;</span><br><span class="line"><span class="keyword">long</span> now = getTimeOfDay();</span><br><span class="line"><span class="comment">//水随着时间流逝,不断流走,最多就流干到0。</span></span><br><span class="line">water = max(<span class="number">0</span>, water- (now - refreshTime)*rate);</span><br><span class="line">refreshTime = now;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">bool <span class="title">permissionGranted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">refreshWater();</span><br><span class="line"><span class="keyword">if</span> (water &lt; burst) &#123; <span class="comment">// 水桶还没满,继续加1</span></span><br><span class="line">water ++;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为漏桶的漏出速率是固定的参数,所以,即使网络中不存在资源冲突(没有发生拥塞),漏桶算法也不能使流突发(burst)到端口速率。因此,漏桶算法对于存在突发特性的流量来说缺乏效率。</p>
 <h2 id="令牌桶算法"><a href="#令牌桶算法" class="headerlink" title="令牌桶算法"></a>令牌桶算法</h2><p>对于很多应用场景来说，除了要求能够限制数据的平均传输速率外，还要求允许某种程度的突发传输。这时候漏桶算法可能就不合适了，令牌桶算法更为适合。<br>如下图所示，令牌桶算法的原理是系统会以一个恒定的速度往桶里放入令牌，而如果请求需要被处理，则需要先从桶里获取一个令牌，当桶里没有令牌可取时，则拒绝服务。</p>
 <img title="令牌桶算法示意图" alt="令牌桶算法示意图" src="http://img.qianzhousoft.com/static/images/201906/令牌桶算法示意图.png-blogImg">
+<p>Google开源工具包Guava提供了限流工具类RateLimiter，该类基于令牌桶算法来完成限流，非常易于使用。<br>具体使用请参考：<a href="https://dzone。com/articles/ratelimiter-discovering-google" target="_blank" rel="noopener">RateLimiter使用实践</a><br>主要源码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">acquire</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> acquire(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">acquire</span><span class="params">(<span class="keyword">int</span> permits)</span> </span>&#123;</span><br><span class="line">        checkPermits(permits);  <span class="comment">//检查参数是否合法（是否大于0）</span></span><br><span class="line">        <span class="keyword">long</span> microsToWait;</span><br><span class="line">        <span class="keyword">synchronized</span> (mutex) &#123; <span class="comment">//应对并发情况需要同步</span></span><br><span class="line">            microsToWait = reserveNextTicket(permits, readSafeMicros()); <span class="comment">//获得需要等待的时间 </span></span><br><span class="line">        &#125;</span><br><span class="line">        ticker。sleepMicrosUninterruptibly(microsToWait); <span class="comment">//等待，当未达到限制时，microsToWait为0</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>。<span class="number">0</span> * microsToWait / TimeUnit。SECONDS。toMicros(<span class="number">1L</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">long</span> <span class="title">reserveNextTicket</span><span class="params">(<span class="keyword">double</span> requiredPermits, <span class="keyword">long</span> nowMicros)</span> </span>&#123;</span><br><span class="line">        resync(nowMicros); <span class="comment">//补充令牌</span></span><br><span class="line">        <span class="keyword">long</span> microsToNextFreeTicket = nextFreeTicketMicros - nowMicros;</span><br><span class="line">        <span class="keyword">double</span> storedPermitsToSpend = Math。min(requiredPermits, <span class="keyword">this</span>。storedPermits); <span class="comment">//获取这次请求消耗的令牌数目</span></span><br><span class="line">        <span class="keyword">double</span> freshPermits = requiredPermits - storedPermitsToSpend;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> waitMicros = storedPermitsToWaitTime(<span class="keyword">this</span>。storedPermits, storedPermitsToSpend)</span><br><span class="line">                + (<span class="keyword">long</span>) (freshPermits * stableIntervalMicros); </span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>。nextFreeTicketMicros = nextFreeTicketMicros + waitMicros;</span><br><span class="line">        <span class="keyword">this</span>。storedPermits -= storedPermitsToSpend; <span class="comment">// 减去消耗的令牌</span></span><br><span class="line">        <span class="keyword">return</span> microsToNextFreeTicket;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">resync</span><span class="params">(<span class="keyword">long</span> nowMicros)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// if nextFreeTicket is in the past, resync to now</span></span><br><span class="line">        <span class="keyword">if</span> (nowMicros &gt; nextFreeTicketMicros) &#123;</span><br><span class="line">            storedPermits = Math。min(maxPermits,</span><br><span class="line">                    storedPermits + (nowMicros - nextFreeTicketMicros) / stableIntervalMicros);</span><br><span class="line">            nextFreeTicketMicros = nowMicros;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>令牌桶的另外一个好处是可以方便的改变速度。 一旦需要提高速率,则按需提高放入桶中的令牌的速率。 一般会定时(比如100毫秒)往桶中增加一定数量的令牌, 有些变种算法则实时的计算应该增加的令牌的数量。</p>
 
       
     </div>
